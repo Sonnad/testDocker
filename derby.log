@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Fri Dec 22 02:54:05 MSK 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0160-7b7f-8f74-0000108693b0 
-on database directory memory:/Users/jura/IdeaProjects/testDocker/demo with class loader java.net.URLClassLoader@51b3ef5c 
+Fri Dec 22 05:27:22 MSK 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0160-7c0b-e64c-000004b92330 
+on database directory memory:/Users/jura/IdeaProjects/testDocker/demo with class loader sun.misc.Launcher$AppClassLoader@433c675d 
 Loaded from file:/Users/jura/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_73-b02
