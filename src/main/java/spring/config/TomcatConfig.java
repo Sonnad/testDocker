@@ -29,8 +29,6 @@ public class TomcatConfig {
 
                 Connector connector = new Connector(TomcatEmbeddedServletContainerFactory.DEFAULT_PROTOCOL);
                 connector.setPort(httpPort);
-//                connector.setRedirectPort(httpsPort);
-                containerFactory.addAdditionalTomcatConnectors(connector);
             }
         };
     }
