@@ -14,11 +14,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TomcatConfig {
 
-    @Value("${server.http.port}")
+    @Value("${server.port}")
     private int httpPort;
 
-    @Value("${server.port}")
-    private int httpsPort;
+//    @Value("${server.port}")
+//    private int httpsPort;
 
     @Bean
     public EmbeddedServletContainerCustomizer containerCustomizer() {
@@ -29,28 +29,28 @@ public class TomcatConfig {
 
                 Connector connector = new Connector(TomcatEmbeddedServletContainerFactory.DEFAULT_PROTOCOL);
                 connector.setPort(httpPort);
-                connector.setRedirectPort(httpsPort);
+//                connector.setRedirectPort(httpsPort);
                 containerFactory.addAdditionalTomcatConnectors(connector);
             }
         };
     }
 
-    @Bean
-    public EmbeddedServletContainerFactory servletContainer() {
-        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
-            @Override
-            protected void postProcessContext(org.apache.catalina.Context context) {
-                SecurityConstraint securityConstraint = new SecurityConstraint();
-                securityConstraint.setUserConstraint("CONFIDENTIAL");
-                SecurityCollection collection = new SecurityCollection();
-                collection.addPattern("/login");
-                collection.addPattern("/registration");
-                securityConstraint.addCollection(collection);
-                context.addConstraint(securityConstraint);
-            }
-        };
-
-        return tomcat;
-    }
+//    @Bean
+//    public EmbeddedServletContainerFactory servletContainer() {
+//        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
+//            @Override
+//            protected void postProcessContext(org.apache.catalina.Context context) {
+//                SecurityConstraint securityConstraint = new SecurityConstraint();
+//                securityConstraint.setUserConstraint("CONFIDENTIAL");
+//                SecurityCollection collection = new SecurityCollection();
+//                collection.addPattern("/login");
+//                collection.addPattern("/registration");
+//                securityConstraint.addCollection(collection);
+//                context.addConstraint(securityConstraint);
+//            }
+//        };
+//
+//        return tomcat;
+//    }
 
 }
