@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+    <meta name='viewport' content='width=device-width, initial-scale=1'/>
+    <title>ТРСИС</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
+    <style type="text/css">
+        .centerLayer {
+            margin-left: 30%;
+            width: 40%;
+            padding: 10px;
+        }
+    </style>
+</head>
+    <body ng-app="search" ng-controller="SearchController">
+    <nav class="navbar navbar-inverse" th:replace="fragments/header :: header">
+    </nav>
+        <div class='container centerLayer'>
+            <h2 align='center' th:text="${author}">Автор</h2>
+            <table class='table table-striped'>
+                <thead>
+                <tr>
+                    <th>Название</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.id.book.title}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

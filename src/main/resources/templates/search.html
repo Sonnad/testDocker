@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+    <meta name='viewport' content='width=device-width, initial-scale=1'/>
+    <title>ТРСИС</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
+    <script src="js/search.js"></script>
+    <style type="text/css">
+        .centerLayer {
+            margin-left: 30%;
+            width: 40%;
+            padding: 10px;
+        }
+    </style>
+</head>
+    <body ng-app="search" ng-controller="SearchController">
+    <nav class="navbar navbar-inverse" th:replace="fragments/header :: header">
+    </nav>
+        <form class="centerLayer" method='GET'>
+            <div class="alert alert-danger" ng-show="isSearchError">
+                <strong>Error!</strong> {{errorMessage}}
+            </div>
+            <div class="input-group">
+                <input type="text" class="form-control" name='search' ng-model="name" placeholder="Search"/>
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit" ng-click="search(name)">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div ng-show="bookList.length > 0" class='container centerLayer'>
+            <h2 align='center' th:text="#{header.login}">Список книг</h2>
+            <table id="bookTable" class='table table-striped'>
+                <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Автор</th>
+                    <th>Издательство</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="book in bookList">
+                    <td>{{book.name}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.publisher}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="parent centerLayer">
+            <div id="block">
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='/sample'">Назад</button>
+            </div>
+        </div>
+    </body>
+</html>

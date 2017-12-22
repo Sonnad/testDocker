@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:text-align="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name='viewport' content='width=device-width, initial-scale=1'/>
+    <title>ТРСИС</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <link href="#" rel="stylesheet" media="screen" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <script src="js/sample.js"></script>
+    <style type="text/css">
+        .centerLayer {
+            margin-left: 30%;
+            width: 40%;
+            padding: 10px;
+        }
+        #myDiv {
+            margin-top: 5%;
+        }
+        .center-form {
+            width: 250px;
+            margin: 0 auto;
+            margin-top: 0.5%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body ng-app="sample" ng-controller="SampleController">
+
+<nav class="navbar navbar-inverse" th:replace="fragments/header :: header">
+</nav>
+
+<div ng-controller="getList" class='container centerLayer'>
+    <h2 align='center' th:text = "#{sample.tableName}">Список книг</h2>
+    <table id="bookTable" class='table table-striped'>
+        <thead>
+        <tr>
+            <th th:text="#{book.name}">Title</th>
+            <th th:text="#{book.author}">Author</th>
+            <th th:text="#{book.publisher}">Publisher</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="book in bookList">
+                <td>{{book.id.book.title}}</td>
+                <td> <a href='author/{{book.id.author.fullName}}'>{{book.id.author.fullName}}</a></td>
+                <td>{{book.publisher.name}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<form class="col-sm-6" method='POST' sec:authorize="isAuthenticated()">
+    <h3 align='center' th:text="#{sample.add}">Add book</h3>
+    <div class="form-group">
+        <div class="alert alert-danger" ng-show="isAddError">
+            <strong th:text="#{sample.error}">Error!</strong> {{errorMessage}}
+        </div>
+        <label for="bookName" th:text="#{book.name}">Title:</label>
+        <input type="text" name='bookName' ng-model="bookName" class="form-control" id="bookName"/>
+    </div>
+    <div class="form-group">
+        <label for="bookAuthor" th:text="#{book.author}">Author:</label>
+        <input type="text" name='bookAuthor'  ng-model="bookAuthor" class="form-control" id="bookAuthor"/>
+    </div>
+    <div class="form-group">
+        <label for="bookPublisher" th:text="#{book.publisher}">Publisher:</label>
+        <input type='text' name='bookPublisher' ng-model="bookPublisher"  class="form-control" id="bookPublisher"/>
+    </div>
+    <button type="submit" ng-click="addBook(bookName,bookAuthor,bookPublisher)" name='add' class="btn btn-default" th:text="#{sample.buttonAdd}">Добавить</button>
+</form>
+<div class="container" sec:authorize="isAuthenticated()">
+    <form class="col-sm-6">
+        <h3 align='center' th:text="#{sample.delete}">Delete book</h3>
+        <div class="alert alert-danger" ng-show="isDeleteError">
+            <strong th:text="#{sample.error}">Error!</strong> {{errorMessage}}
+        </div>
+        <div class="form-group">
+            <label for="deleteBookName" th:text="#{sample.title}">Book title:</label>
+            <input type="text" name='deleteBook'  ng-model="deleteBook" class="form-control" id="deleteBookName"/>
+        </div>
+        <button type="button" class="btn btn-default" ng-click="delete(deleteBook)" name="del" th:text="#{sample.buttonDelete}">Удалить</button>
+    </form>
+</div>
+</body>
+</html>
